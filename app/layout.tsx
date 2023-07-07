@@ -10,6 +10,7 @@ import RegisterModel from "./components/models/RegisterModel";
 import LoginModel from "./components/models/LoginModel";
 
 import getCurrentUser from "./actions/getCurrentUser";
+import RentModel from "./components/models/RentModel";
 
 export const metadata = {
   title: "Airbn",
@@ -34,6 +35,7 @@ export default async function RootLayout({
           <ToasterProvider />
           <RegisterModel />
           <LoginModel />
+          <RentModel />
           <Navbar currentUser={currentUser} />
         </ClientOnly>
         {children}

@@ -11,6 +11,7 @@ import { signOut } from "next-auth/react";
 
 import useRegistermodel from "@/app/hooks/useRegisterModel";
 import useLoginmodel from "@/app/hooks/useLoginModel";
+import useRentmodel from "@/app/hooks/useRentModel";
 
 import { SafeUser } from "@/app/types";
 
@@ -22,17 +23,26 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const [isOpen, setIsOpen] = useState(false);
   const registerModel = useRegistermodel();
   const loginModel = useLoginmodel();
+  const rentModel = useRentmodel();
+
   const router = useRouter();
 
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
 
+  const onRent = useCallback(() => {
+    if (!currentUser) {
+      return loginModel.onOpen();
+    }
+    rentModel.onOpen();
+  }, [currentUser, loginModel, rentModel]);
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
         <div
-          //   onClick={onRent}
+          onClick={onRent}
           className="
             hidden
             md:block
@@ -94,7 +104,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 <MenuItem label="My favorites" onClick={() => {}} />
                 <MenuItem label="My reservations" onClick={() => {}} />
                 <MenuItem label="My properties" onClick={() => {}} />
-                <MenuItem label="Airbnb my Home" onClick={() => {}} />
+                <MenuItem label="Airbnb my Home" onClick={rentModel.onOpen} />
                 <MenuItem label="Logout" onClick={() => signOut()} />
               </>
             ) : (
