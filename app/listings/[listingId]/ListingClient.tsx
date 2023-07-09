@@ -8,8 +8,7 @@ import { Range } from "react-date-range";
 
 import useLoginmodel from "@/app/hooks/useLoginModel";
 
-import { Reservation } from "@prisma/client";
-import { SafeUser, safeListing } from "@/app/types";
+import { SafeUser, safeListing, SafeReservation } from "@/app/types";
 
 import { categories } from "@/app/components/Navbar/Categories";
 
@@ -25,7 +24,7 @@ const initialDateRange = {
 };
 
 interface ListingClientProps {
-  reservations?: Reservation[];
+  reservations?: SafeReservation[];
   listing: safeListing & {
     user: SafeUser;
   };
@@ -42,7 +41,9 @@ const ListingClient: React.FC<ListingClientProps> = ({
 
   const disabledDates = useMemo(() => {
     let dates: Date[] = [];
-    reservations.forEach((reservation) => {
+    console.log(reservations);
+    
+    reservations.forEach((reservation: any) => {
       const range = eachDayOfInterval({
         start: new Date(reservation.startDate),
         end: new Date(reservation.endDate),
