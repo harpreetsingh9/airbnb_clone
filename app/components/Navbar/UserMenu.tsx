@@ -14,6 +14,7 @@ import useLoginmodel from "@/app/hooks/useLoginModel";
 import useRentmodel from "@/app/hooks/useRentModel";
 
 import { SafeUser } from "@/app/types";
+import Link from "next/link";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
@@ -100,7 +101,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
-                <MenuItem label="My trips" onClick={() => {}} />
+                <Link href="/trips">
+                  <MenuItem label="My trips" onClick={() => {}} />
+                </Link>
                 <MenuItem label="My favorites" onClick={() => {}} />
                 <MenuItem label="My reservations" onClick={() => {}} />
                 <MenuItem label="My properties" onClick={() => {}} />

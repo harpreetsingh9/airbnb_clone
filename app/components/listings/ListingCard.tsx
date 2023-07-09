@@ -8,6 +8,7 @@ import useCountries from "@/app/hooks/useCountries";
 import Image from "next/image";
 import HeartButton from "../HeartButton";
 import Button from "../Button";
+import Link from "next/link";
 
 interface ListingCardProps {
   data: safeListing;
@@ -60,41 +61,40 @@ const ListingCard: React.FC<ListingCardProps> = ({
   }, [reservation]);
 
   return (
-    <div
-      onClick={() => router.push(`/listings/${data.id}`)}
-      className="cursor-pointer group col-span-1"
-    >
-      <div className="flex flex-col gap-2 w-full">
-        <div className="w-full aspect-square relative overflow-hidden rounded-xl">
-          <Image
-            fill
-            src={data.imagesrc}
-            alt="listing"
-            className="h-full w-full object-cover transition group-hover:scale-110"
-          />
-          <div className="absolute top-3 right-3">
-            <HeartButton listingId={data.id} currentUser={currentUser} />
+    <div className="cursor-pointer group col-span-1">
+      <Link href={`/listings/${data.id}`}>
+        <div className="flex flex-col gap-2 w-full">
+          <div className="w-full aspect-square relative overflow-hidden rounded-xl">
+            <Image
+              fill
+              src={data.imagesrc}
+              alt="listing"
+              className="h-full w-full object-cover transition group-hover:scale-110"
+            />
+            <div className="absolute top-3 right-3">
+              <HeartButton listingId={data.id} currentUser={currentUser} />
+            </div>
           </div>
+          <div className="font-semibold text-lg">
+            {location?.region}, {location?.label}
+          </div>
+          <div className="font-light text-neutral-500">
+            {reservationDate || data.category}
+          </div>
+          <div className="flex flex-row items-center gap-1">
+            <div className="font-semibold">$ {price}</div>
+            {reservation && <div className="font-light">night</div>}
+          </div>
+          {onAction && actionLabel && (
+            <Button
+              disabled={disabled}
+              small
+              label={actionLabel}
+              onClick={handleCancel}
+            />
+          )}
         </div>
-        <div className="font-semibold text-lg">
-          {location?.region}, {location?.label}
-        </div>
-        <div className="font-light text-neutral-500">
-          {reservationDate || data.category}
-        </div>
-        <div className="flex flex-row items-center gap-1">
-          <div className="font-semibold">$ {price}</div>
-          {reservation && <div className="font-light">night</div>}
-        </div>
-        {onAction && actionLabel && (
-          <Button
-            disabled={disabled}
-            small
-            label={actionLabel}
-            onClick={handleCancel}
-          />
-        )}
-      </div>
+      </Link>
     </div>
   );
 };

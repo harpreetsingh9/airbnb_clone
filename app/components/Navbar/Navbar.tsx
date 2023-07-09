@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Container from '../Container'
 import Categories from './Categories'
 import Logo from './Logo'
@@ -17,7 +18,9 @@ const Navbar: React.FC<NavbarProps> = ({currentUser}) => {
         <div className='py-4 border-b-[1px]'>
           <Container>
             <div className='flex flex-row items-center justify-between gap-3 md:gap-0'>
-              <Logo />
+              <Link href="/">
+                <Logo />
+              </Link>
               <Search />
               <UserMenu currentUser={currentUser} />
             </div>
