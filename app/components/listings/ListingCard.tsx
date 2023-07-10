@@ -61,8 +61,8 @@ const ListingCard: React.FC<ListingCardProps> = ({
 
   return (
     <div className="cursor-pointer group col-span-1">
-      <Link href={`/listings/${data.id}`}>
-        <div className="flex flex-col gap-2 w-full">
+      <div className="flex flex-col gap-2 w-full">
+        <Link href={`/listings/${data.id}`}>
           <div className="w-full aspect-square relative overflow-hidden rounded-xl">
             <Image
               fill
@@ -84,16 +84,16 @@ const ListingCard: React.FC<ListingCardProps> = ({
             <div className="font-semibold">$ {price}</div>
             {!reservation && <div className="font-light">night</div>}
           </div>
-          {onAction && actionLabel && (
-            <Button
-              disabled={disabled}
-              small
-              label={actionLabel}
-              onClick={handleCancel}
-            />
-          )}
-        </div>
-      </Link>
+        </Link>
+        {onAction && actionLabel && (
+          <Button
+            disabled={disabled}
+            small
+            label={actionLabel}
+            onClick={handleCancel}
+          />
+        )}
+      </div>
     </div>
   );
 };
