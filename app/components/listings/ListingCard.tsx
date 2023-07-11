@@ -62,18 +62,20 @@ const ListingCard: React.FC<ListingCardProps> = ({
   return (
     <div className="cursor-pointer group col-span-1">
       <div className="flex flex-col gap-2 w-full">
-        <Link href={`/listings/${data.id}`}>
-          <div className="w-full aspect-square relative overflow-hidden rounded-xl">
+        <div className="w-full aspect-square relative overflow-hidden rounded-xl">
+          <Link href={`/listings/${data.id}`}>
             <Image
               fill
               src={data.imagesrc}
               alt="listing"
               className="h-full w-full object-cover transition group-hover:scale-110"
             />
-            <div className="absolute top-3 right-3">
-              <HeartButton listingId={data.id} currentUser={currentUser} />
-            </div>
+          </Link>
+          <div className="absolute top-3 right-3">
+            <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
+        </div>
+        <Link href={`/listings/${data.id}`}>
           <div className="font-semibold text-lg">
             {location?.region}, {location?.label}
           </div>
