@@ -1,16 +1,16 @@
 import ClientOnly from "./components/ClientOnly";
 import "./globals.css";
 
-import Navbar from "./components/Navbar/Navbar";
-
 import { Nunito } from "next/font/google";
 import ToasterProvider from "./providers/ToasterProvider";
+import getCurrentUser from "./actions/getCurrentUser";
 
+import Navbar from "./components/Navbar/Navbar";
 import RegisterModel from "./components/models/RegisterModel";
 import LoginModel from "./components/models/LoginModel";
-
-import getCurrentUser from "./actions/getCurrentUser";
+import SearchModel from "./components/models/SearchModel";
 import RentModel from "./components/models/RentModel";
+
 
 export const metadata = {
   title: "Airbn",
@@ -36,6 +36,7 @@ export default async function RootLayout({
           <RegisterModel />
           <LoginModel />
           <RentModel />
+          <SearchModel />
           <Navbar currentUser={currentUser} />
         {/* </ClientOnly> */}
         <div className="pb-20 pt-28">{children}</div>
